@@ -315,12 +315,6 @@ dealbridge-ai/
 
 ---
 
-## 🎬 Demo
-
-**Live Demo:** https://fc43e735-f7c7-4938-ac64-71794187d6fb-00-2o2peizcwa2n5.sisko.replit.dev/
-
-**Video Demo:** [Your YouTube/Loom URL]
-
 ---
 
 ## 🔐 Security
