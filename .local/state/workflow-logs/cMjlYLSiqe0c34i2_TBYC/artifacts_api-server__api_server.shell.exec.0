@@ -1,0 +1,168 @@
+
+> @workspace/api-server@0.0.0 dev /home/runner/workspace/artifacts/api-server
+> export NODE_ENV=development && pnpm run build && pnpm run start
+
+
+> @workspace/api-server@0.0.0 build /home/runner/workspace/artifacts/api-server
+> node ./build.mjs
+
+
+  [37mdist/[0m[1mindex.mjs[0m                       [33m1.5mb ⚠️[0m
+  [37mdist/[0m[1mpino-worker.mjs[0m               [36m153.4kb[0m
+  [37mdist/[0m[1mpino-file.mjs[0m                 [36m142.1kb[0m
+  [37mdist/[0m[1mpino-pretty.mjs[0m               [36m114.6kb[0m
+  [37mdist/[0m[1mthread-stream-worker.mjs[0m        [36m7.3kb[0m
+  [37mdist/[0m[1mindex.mjs.map[0m                   [36m2.3mb[0m
+  [37mdist/[0m[1mpino-worker.mjs.map[0m           [36m256.9kb[0m
+  [37mdist/[0m[1mpino-file.mjs.map[0m             [36m229.0kb[0m
+  [37mdist/[0m[1mpino-pretty.mjs.map[0m           [36m204.0kb[0m
+  [37mdist/[0m[1mthread-stream-worker.mjs.map[0m   [36m12.0kb[0m
+
+⚡ [32mDone in 212ms[0m
+
+> @workspace/api-server@0.0.0 start /home/runner/workspace/artifacts/api-server
+> node --enable-source-maps ./dist/index.mjs
+
+[18:00:25.004] [32mINFO[39m (4019): [36mServer listening[39m
+    [35mport[39m: 8080
+[18:00:25.644] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 1,
+      "method": "GET",
+      "url": "/"
+    }
+    [35mres[39m: {
+      "statusCode": 404
+    }
+    [35mresponseTime[39m: 4
+[18:00:59.128] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 2,
+      "method": "GET",
+      "url": "/api/leads"
+    }
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 3
+[18:01:10.357] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 3,
+      "method": "GET",
+      "url": "/api/leads"
+    }
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 3
+[18:01:13.818] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 4,
+      "method": "GET",
+      "url": "/api/leads"
+    }
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 1
+[18:01:30.597] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 5,
+      "method": "GET",
+      "url": "/api/leads"
+    }
+    [35mres[39m: {
+      "statusCode": 304
+    }
+    [35mresponseTime[39m: 2
+[18:01:34.796] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 6,
+      "method": "GET",
+      "url": "/api/leads"
+    }
+    [35mres[39m: {
+      "statusCode": 304
+    }
+    [35mresponseTime[39m: 1
+[18:01:48.722] [32mINFO[39m (4019): [36m[2026-06-28T18:01:48.722Z] POST /api/aicoo/chat from 127.0.0.1[39m
+    [35mreq[39m: {
+      "id": 7,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/aicoo/chat"
+    [35mip[39m: "127.0.0.1"
+    [35mkey[39m: "aicoo_sk_l***_Res"
+[18:01:51.560] [31mERROR[39m (4019): [36mAicoo upstream error[39m
+    [35mreq[39m: {
+      "id": 7,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mstatus[39m: 400
+    [35mpath[39m: "/chat"
+[18:01:51.560] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 7,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mres[39m: {
+      "statusCode": 400
+    }
+    [35mresponseTime[39m: 2853
+[18:01:52.102] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 8,
+      "method": "POST",
+      "url": "/api/leads"
+    }
+    [35mres[39m: {
+      "statusCode": 201
+    }
+    [35mresponseTime[39m: 25
+[18:02:04.989] [32mINFO[39m (4019): [36m[2026-06-28T18:02:04.989Z] POST /api/aicoo/chat from 127.0.0.1[39m
+    [35mreq[39m: {
+      "id": 9,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/aicoo/chat"
+    [35mip[39m: "127.0.0.1"
+    [35mkey[39m: "aicoo_sk_l***_Res"
+[18:02:15.912] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 9,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 10924
+[18:02:24.094] [32mINFO[39m (4019): [36m[2026-06-28T18:02:24.094Z] POST /api/aicoo/chat from 127.0.0.1[39m
+    [35mreq[39m: {
+      "id": 10,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/aicoo/chat"
+    [35mip[39m: "127.0.0.1"
+    [35mkey[39m: "aicoo_sk_l***_Res"
+[18:02:35.769] [32mINFO[39m (4019): [36mrequest completed[39m
+    [35mreq[39m: {
+      "id": 10,
+      "method": "POST",
+      "url": "/api/aicoo/chat"
+    }
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 11675
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed.[39m
+[41m[30m ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL [39m[49m [31m@workspace/api-server@0.0.0 dev: `export NODE_ENV=development && pnpm run build && pnpm run start`[39m
+[31mCommand failed with signal "SIGTERM"[39m

@@ -1,0 +1,56 @@
+Build the Routing Decision screen — autonomous scoring & specialist selection with visual flow:
+
+FILE: src/screens/RoutingDecision.tsx
+
+LAYOUT:
+- Full width
+- Header: "Smart Routing Analysis" (Crimson Text)
+- Subheader: "Finding the best specialist for this lead..."
+
+THREE-STAGE AUTONOMOUS ANIMATION (no clicks):
+
+STAGE 1 (0-1s): Show all 4 specialists
+- Grid: 4 cards (2x2 on desktop, 2x2 on tablet, 1x4 on mobile)
+- Each card: glassmorphic, 200x250px, centered
+- Card content: icon + name + subtitle
+- Start state: 50% opacity, reduced brightness (filter: brightness(0.6))
+- Specialists:
+  * Solutions Engineer (cog icon, subtitle "Technical integration")
+  * Healthcare Compliance (shield icon, "Regulatory")
+  * Sales Director (chart icon, "Commercial")
+  * Finance Lead (dollar icon, "Budget planning")
+
+STAGE 2 (1-3s): Scoring animation
+- For each specialist, a score bar animates from left
+- Bar shows: "Relevance: XX%"
+- Colors: green (>80%), yellow (60-80%), red (<60%)
+- Numbers count up: 0 → final score over 800ms
+- Scores:
+  * Solutions Engineer: 92% (green)
+  * Healthcare Compliance: 88% (green)
+  * Sales Director: 65% (yellow)
+  * Finance Lead: 45% (red)
+
+STAGE 3 (3-4s): Selection & routing
+- Top 2 specialists highlight: bright cyan glow, scale up 1.1x
+- Others dim to 30% opacity
+- Animated flow chart appears:
+  - Center point (lead data)
+  - Arrows to selected specialists (animated stroke-dashoffset)
+  - Label: "Healthcare + Compliance Requirements → Solutions Engineer + Compliance"
+- Arrows animate with flowing motion
+
+FINAL DISPLAY (after 4s):
+- Large highlighted cards for 2 selected specialists
+- Subheading: "These specialists will review your scoped context"
+- Button: "Create Handoff Brief" → setScreen("handoff")
+
+AUTONOMOUS: entire flow happens automatically on mount. User just watches.
+
+OUTPUT:
+Return complete RoutingDecision.tsx with:
+- 4 specialist card components
+- Staged animation timing (0-1s, 1-3s, 3-4s)
+- Scoring bar animations (width + text count-up)
+- Flow chart SVG with animated arrows
+- No interaction until final button

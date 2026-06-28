@@ -1,0 +1,98 @@
+CREATE FILE: src/lib/dataExtractor.ts
+
+PURPOSE: Extract form data from chat messages using keyword matching
+
+FUNCTION: extractDataFromMessage(message: string): Partial<LeadData>
+
+TYPE:
+```typescript
+interface LeadData {
+  useCase: string | null;
+  companyType: string | null;
+  teamSize: string | null;
+  urgency: string | null;
+  integrations: string | null;
+  budget: string | null;
+}
+```
+
+EXTRACTION LOGIC:
+
+```typescript
+function extractDataFromMessage(message: string): Partial<LeadData> {
+  const lower = message.toLowerCase();
+  const result: Partial<LeadData> = {};
+  
+  // USE CASE extraction
+  if (lower.includes("voice") || lower.includes("chat")) {
+    result.useCase = "AI Voice/Chat Workflow";
+  } else if (lower.includes("intake") || lower.includes("onboarding")) {
+    result.useCase = "Patient Intake System";
+  }
+  
+  // COMPANY TYPE extraction
+  if (lower.includes("clinic")) {
+    result.companyType = "Healthcare Clinic";
+  } else if (lower.includes("hospital")) {
+    result.companyType = "Hospital";
+  } else if (lower.includes("saas") || lower.includes("startup")) {
+    result.companyType = "SaaS Startup";
+  }
+  
+  // TEAM SIZE extraction
+  const teamMatch = message.match(/(\d+)\s*(-|to)?\s*(\d+)?\s*(people|team|staff|person)/i);
+  if (teamMatch) {
+    result.teamSize = `${teamMatch[1]}${teamMatch[3] ? `-${teamMatch[3]}` : ''} people`;
+  } else if (lower.includes("small team")) {
+    result.teamSize = "5-10 people";
+  } else if (lower.includes("large team")) {
+    result.teamSize = "50+ people";
+  }
+  
+  // URGENCY extraction
+  if (lower.includes("urgent") || lower.includes("asap") || lower.includes("rush")) {
+    result.urgency = "High — weeks";
+  } else if (lower.includes("soon") || lower.includes("month")) {
+    result.urgency = "Medium — months";
+  }
+  
+  // INTEGRATIONS extraction
+  if (lower.includes("epic")) {
+    result.integrations = "EHR (Epic)";
+  } else if (lower.includes("cerner")) {
+    result.integrations = "EHR (Cerner)";
+  } else if (lower.includes("hipaa")) {
+    result.integrations = "HIPAA Compliance";
+  } else if (lower.includes("sso") || lower.includes("single sign")) {
+    result.integrations = "SSO/SAML";
+  }
+  
+  // BUDGET extraction
+  const budgetMatch = message.match(/\$?([\d,]+[k]?)/i);
+  if (budgetMatch) {
+    result.budget = `$${budgetMatch[1]}/year`;
+  } else if (lower.includes("enterprise")) {
+    result.budget = "$100K+/year";
+  } else if (lower.includes("startup")) {
+    result.budget = "$10K-50K/year";
+  }
+  
+  return result;
+}
+```
+
+USAGE in ProspectChat.tsx:
+```typescript
+import { extractDataFromMessage } from "@/lib/dataExtractor";
+
+// When user submits message:
+const extracted = extractDataFromMessage(userMessage);
+setExtractedData(prev => ({ ...prev, ...extracted }));
+```
+
+OUTPUT:
+Return complete src/lib/dataExtractor.ts with:
+- Comprehensive keyword matching for all 6 fields
+- Regex patterns for numbers (team size, budget)
+- Easy to expand with more keywords
+- Type-safe (return type is Partial<LeadData>)

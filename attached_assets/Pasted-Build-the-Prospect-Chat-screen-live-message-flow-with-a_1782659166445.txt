@@ -1,0 +1,54 @@
+Build the Prospect Chat screen — live message flow with autonomous data extraction:
+
+FILE: src/screens/ProspectChat.tsx
+
+LAYOUT:
+- Left 60%: chat window (glassmorphic card, scrollable)
+- Right 40%: data extraction sidebar (glassmorphic card)
+- Stack vertically on mobile
+
+CHAT WINDOW:
+- Initial AI message: "Hi! I'm your AI COO. Let's understand your needs so I can route you to the right specialist. What's your use case?"
+- Messages: alternate AI (indigo bg) and User (transparent border)
+- Message typing: characters appear one-by-one (50ms per character)
+- User input field at bottom: glassmorphic input, cyan glow on focus
+- Auto-scroll to latest message
+
+DEMO CONVERSATION (mock data):
+Run these exchanges automatically (with delays):
+1. AI: initial greeting (1s delay)
+2. User: "We need an AI voice-and-chat workflow for a healthcare clinic" (instant)
+3. AI: follow-up about team size (2s delay, types out)
+4. User: "About 15-20 people" (instant)
+5. AI: ask about urgency (2s delay)
+6. User: "Urgent - we want a pilot in 6 weeks" (instant)
+... continue 1-2 more exchanges
+
+DATA EXTRACTION SIDEBAR:
+- Show fields: Use Case | Company Type | Team Size | Urgency | Integration | Budget
+- As messages arrive, fields populate with colored highlights
+- Animation: new field slides in from left + cyan glow pulse (1s)
+- No text explanations — just the data appearing
+- Demo data:
+  * Use Case: Healthcare Voice/Chat (cyan)
+  * Company Type: Clinic (cyan)
+  * Team Size: 15-20 (cyan)
+  * Urgency: High (orange/warning color)
+  * Integration Needs: EHR compatible
+  * Budget: $50K-100K/year
+
+LOADING STATE:
+- Between messages: pulsing dots (cyan color)
+- Simulated delay: 1500-2000ms before AI response
+
+BUTTONS:
+- "Generate Account Brief" at bottom right → setScreen("account-brief")
+- Auto-advance after 4th exchange (optional, or user can click)
+
+OUTPUT:
+Return complete ProspectChat.tsx with:
+- Mock conversation data (hardcoded)
+- Staggered message display
+- Data extraction sidebar with animations
+- Typewriter effect for message text
+- No real API calls yet (we mock delays)

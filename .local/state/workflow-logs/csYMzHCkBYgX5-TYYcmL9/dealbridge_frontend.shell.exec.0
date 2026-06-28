@@ -1,0 +1,19 @@
+
+> @workspace/dealbridge@0.0.0 dev /home/runner/workspace/artifacts/dealbridge
+> vite --config vite.config.ts --host 0.0.0.0
+
+[31mfailed to load config from /home/runner/workspace/artifacts/dealbridge/vite.config.ts[39m
+[31merror when starting dev server:
+Error: PORT environment variable is required but was not provided.
+    at file:///home/runner/workspace/artifacts/dealbridge/node_modules/.vite-temp/vite.config.ts.timestamp-1782667312519-9f5b9cb78039a.mjs:10:9
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async loadConfigFromBundledFile (file:///home/runner/workspace/node_modules/.pnpm/vite@7.3.5_@types+node@25.9.4_jiti@2.7.0_lightningcss@1.32.0_tsx@4.22.4_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35996:12)
+    at async bundleAndLoadConfigFile (file:///home/runner/workspace/node_modules/.pnpm/vite@7.3.5_@types+node@25.9.4_jiti@2.7.0_lightningcss@1.32.0_tsx@4.22.4_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35884:17)
+    at async loadConfigFromFile (file:///home/runner/workspace/node_modules/.pnpm/vite@7.3.5_@types+node@25.9.4_jiti@2.7.0_lightningcss@1.32.0_tsx@4.22.4_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35851:42)
+    at async resolveConfig (file:///home/runner/workspace/node_modules/.pnpm/vite@7.3.5_@types+node@25.9.4_jiti@2.7.0_lightningcss@1.32.0_tsx@4.22.4_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35500:22)
+    at async _createServer (file:///home/runner/workspace/node_modules/.pnpm/vite@7.3.5_@types+node@25.9.4_jiti@2.7.0_lightningcss@1.32.0_tsx@4.22.4_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:25441:67)
+    at async CAC.<anonymous> (file:///home/runner/workspace/node_modules/.pnpm/vite@7.3.5_@types+node@25.9.4_jiti@2.7.0_lightningcss@1.32.0_tsx@4.22.4_yaml@2.9.0/node_modules/vite/dist/node/cli.js:572:18)[39m
+/home/runner/workspace/artifacts/dealbridge:
+[41m[30m ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL [39m[49m [31m@workspace/dealbridge@0.0.0 dev: `vite --config vite.config.ts --host 0.0.0.0`[39m
+[31mExit status 1[39m

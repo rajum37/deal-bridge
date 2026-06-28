@@ -1,0 +1,446 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: DealBridge AI API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: deals
+    description: Deal pipeline operations
+  - name: ai
+    description: AI analysis operations
+  - name: activity
+    description: Activity feed operations
+  - name: stats
+    description: Dashboard stats
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /deals:
+    get:
+      operationId: listDeals
+      tags: [deals]
+      summary: List all deals
+      parameters:
+        - name: stage
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of deals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Deal"
+    post:
+      operationId: createDeal
+      tags: [deals]
+      summary: Create a deal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DealInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deal"
+
+  /deals/{id}:
+    get:
+      operationId: getDeal
+      tags: [deals]
+      summary: Get a deal
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deal details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deal"
+    patch:
+      operationId: updateDeal
+      tags: [deals]
+      summary: Update a deal
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DealUpdate"
+      responses:
+        "200":
+          description: Updated deal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deal"
+    delete:
+      operationId: deleteDeal
+      tags: [deals]
+      summary: Delete a deal
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+
+  /deals/{id}/analyze:
+    post:
+      operationId: analyzeDeal
+      tags: [ai]
+      summary: AI analysis of a deal
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: AI analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealAnalysis"
+
+  /ai/score:
+    post:
+      operationId: scoreDeal
+      tags: [ai]
+      summary: Get AI deal score
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScoreInput"
+      responses:
+        "200":
+          description: Score result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScoreResult"
+
+  /ai/insights:
+    get:
+      operationId: getAiInsights
+      tags: [ai]
+      summary: Get AI-generated market insights
+      responses:
+        "200":
+          description: AI insights
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Insight"
+
+  /activity:
+    get:
+      operationId: listActivity
+      tags: [activity]
+      summary: Recent activity feed
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Activity items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityItem"
+
+  /stats/dashboard:
+    get:
+      operationId: getDashboardStats
+      tags: [stats]
+      summary: Dashboard summary stats
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /stats/pipeline:
+    get:
+      operationId: getPipelineStats
+      tags: [stats]
+      summary: Pipeline breakdown by stage
+      responses:
+        "200":
+          description: Pipeline stage data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PipelineStage"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+
+    Deal:
+      type: object
+      required: [id, title, company, value, stage, score, createdAt]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        company:
+          type: string
+        contactName:
+          type: ["string", "null"]
+        contactEmail:
+          type: ["string", "null"]
+        value:
+          type: number
+        stage:
+          type: string
+          enum: [lead, qualified, proposal, negotiation, closed_won, closed_lost]
+        score:
+          type: number
+        industry:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+        aiSummary:
+          type: ["string", "null"]
+        tags:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: ["string", "null"]
+
+    DealInput:
+      type: object
+      required: [title, company, value, stage]
+      properties:
+        title:
+          type: string
+        company:
+          type: string
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+        value:
+          type: number
+        stage:
+          type: string
+        industry:
+          type: string
+        notes:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    DealUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        company:
+          type: string
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+        value:
+          type: number
+        stage:
+          type: string
+        industry:
+          type: string
+        notes:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    DealAnalysis:
+      type: object
+      required: [dealId, score, summary, strengths, risks, recommendations]
+      properties:
+        dealId:
+          type: string
+        score:
+          type: number
+        summary:
+          type: string
+        strengths:
+          type: array
+          items:
+            type: string
+        risks:
+          type: array
+          items:
+            type: string
+        recommendations:
+          type: array
+          items:
+            type: string
+        winProbability:
+          type: number
+        estimatedCloseDate:
+          type: ["string", "null"]
+
+    ScoreInput:
+      type: object
+      required: [dealData]
+      properties:
+        dealData:
+          type: object
+          additionalProperties: true
+
+    ScoreResult:
+      type: object
+      required: [score, confidence, factors]
+      properties:
+        score:
+          type: number
+        confidence:
+          type: number
+        factors:
+          type: array
+          items:
+            type: string
+
+    Insight:
+      type: object
+      required: [id, title, body, type, createdAt]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        type:
+          type: string
+          enum: [market, deal, risk, opportunity]
+        relevantDealIds:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+
+    ActivityItem:
+      type: object
+      required: [id, type, description, createdAt]
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [deal_created, deal_updated, deal_stage_changed, ai_scored, note_added, deal_won, deal_lost]
+        description:
+          type: string
+        dealId:
+          type: ["string", "null"]
+        dealTitle:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+
+    DashboardStats:
+      type: object
+      required: [totalDeals, totalValue, avgScore, closedWon, closedLost, winRate, avgDealSize]
+      properties:
+        totalDeals:
+          type: integer
+        totalValue:
+          type: number
+        avgScore:
+          type: number
+        closedWon:
+          type: integer
+        closedLost:
+          type: integer
+        winRate:
+          type: number
+        avgDealSize:
+          type: number
+        dealsThisMonth:
+          type: integer
+        valueThisMonth:
+          type: number
+
+    PipelineStage:
+      type: object
+      required: [stage, count, value, avgScore]
+      properties:
+        stage:
+          type: string
+        count:
+          type: integer
+        value:
+          type: number
+        avgScore:
+          type: number

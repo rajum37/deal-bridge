@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "DealBridge AI"
+version = "1.0.0"
+id = "artifacts/dealbridge"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25454
+
+[services.development]
+run = "pnpm --filter @workspace/dealbridge run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/dealbridge", "run", "build" ]
+publicDir = "artifacts/dealbridge/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25454"
+BASE_PATH = "/"

@@ -1,0 +1,48 @@
+CREATE FILE: src/lib/mockAiResponses.ts
+
+PURPOSE: Simple keyword-matching logic for mock AI responses
+
+FUNCTION: getMockAiResponse(userMessage: string): string
+
+LOGIC:
+```typescript
+const mockResponses = {
+  healthcare: "Interesting! Healthcare is a complex space with compliance requirements. Can you tell me more about your team size and timeline?",
+  clinic: "A clinic-based solution makes sense. Are you looking to integrate with your existing EHR system like Epic or Cerner?",
+  urgent: "Got it — tight timeline. That means we need to prioritize integration compatibility and quick onboarding. What's your budget range?",
+  people: "Good to know the team size. That helps us scope the solution. Are there specific compliance requirements we need to account for?",
+  epic: "Epic integration is doable but requires careful API planning. Do you have IT support on your side for the integration?",
+  budget: "Perfect. That budget is solid for a phased rollout. Now, do you have internal resources for HIPAA compliance review?",
+  integration: "Integration requirements are clear. That shapes our routing decision. Any other blockers or priorities?",
+};
+
+function getMockAiResponse(userMessage: string): string {
+  const lowerMessage = userMessage.toLowerCase();
+  
+  // Simple keyword matching
+  for (const [keyword, response] of Object.entries(mockResponses)) {
+    if (lowerMessage.includes(keyword)) {
+      return response;
+    }
+  }
+  
+  // Fallback generic response
+  return "That's helpful context. What else should I know about your needs?";
+}
+```
+
+USAGE in ProspectChat.tsx:
+```typescript
+import { getMockAiResponse } from "@/lib/mockAiResponses";
+
+// On user message submit:
+const aiResponse = getMockAiResponse(userMessage);
+setMessages(prev => [...prev, { role: "ai", text: aiResponse }]);
+```
+
+OUTPUT:
+Return the complete src/lib/mockAiResponses.ts file with:
+- Comprehensive mock response pool (add 10-15 realistic responses, not just 4)
+- Keyword matching logic
+- Fallback response
+- Easy to expand (add more keywords as needed)

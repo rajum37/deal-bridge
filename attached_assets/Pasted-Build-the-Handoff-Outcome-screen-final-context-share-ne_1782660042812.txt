@@ -1,0 +1,62 @@
+Build the Handoff Outcome screen — final context share + next steps with typewriter effect:
+
+FILE: src/screens/HandoffOutcome.tsx
+
+LAYOUT:
+- Left 50%: "Scoped Context Share" card
+- Right 50%: "Next Step Recommendation" card
+- Both: full height, side-by-side on desktop; stacked on mobile
+- Both are glassmorphic
+
+LEFT CARD: Scoped Context Share
+- Headline: "Context Shared with Specialists" (Crimson Text, 24px)
+- Show what each specialist sees (no others' data):
+
+✓ Solutions Engineer can see:
+• Use Case: AI voice-and-chat workflow
+• Team Size: 15-20 people
+• Integration Needs: EHR (Epic), SSO
+• Budget: $50K-100K annual
+
+✓ Compliance Officer can see:
+• Use Case: Patient intake workflow
+• Urgency: 6-week pilot
+• Compliance: HIPAA, data residency
+• Team Size: 15-20 people
+
+- Animation: typewriter effect on mount (50ms per character)
+- Checkmarks (✓) in accent color
+- Mock share link: "https://aicoo.io/shared/f4c8...ab91"
+- Copy button: click → toast "Copied!"
+
+RIGHT CARD: Next Step Recommendation
+- Headline: "Recommended Action" (Crimson Text, 24px)
+- Main text (larger, 18px): "Schedule a technical deep-dive with the Solutions Engineer"
+- Sub-bullets (slide in staggered):
+  * Timing: Next 48 hours
+  * Focus: Integration architecture, EHR compatibility
+  * Attendees: Your team + Solutions Engineer
+- Each bullet animates in from left (100ms stagger)
+
+AUTONOMOUS BEHAVIOR:
+- On mount: left card typewriter effect starts immediately (2-3s to complete)
+- After 2s: right card slides in from bottom + fades in
+- Background: subtle pulse every 2s (opacity 0.9 ↔ 1)
+
+BOTTOM METRICS (flavor text):
+
+Lead qualified in: 2m 34s | Routing decision: 12ms | Context sync: real-time
+
+
+BUTTONS:
+- "Accept & Route" (primary, cyan glow) → (mock action, toast "Routing in progress...")
+- "New Lead" → setScreen("landing")
+- "View Full Audit Trail" → (mock modal or toast)
+
+OUTPUT:
+Return complete HandoffOutcome.tsx with:
+- Typewriter animation function
+- Staggered bullet animations
+- Toast notification (use simple alert or built-in toast library)
+- Metric display at bottom
+- Two-column layout responsive
