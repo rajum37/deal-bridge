@@ -4,7 +4,7 @@
 
 Automatically capture prospect context, score specialist fit, and create scoped share links—all without email forwarding or data leakage.
 
-![DealBridge AI Demo](https://img.shields.io/badge/Devpost-AicooHackathon-blue) ![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![License](https://img.shields.io/badge/License-MIT-green)
+
 
 ---
 
