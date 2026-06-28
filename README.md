@@ -7,7 +7,10 @@
 ![Status](https://img.shields.io/badge/Status-Live-brightgreen) ![Hackathon](https://img.shields.io/badge/Hackathon-Aicoo2026-blue) ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Live Demo:** https://dealbridge-ai-616492501295.asia-southeast1.run.app/
+
+
 ![How Meet2Action works](./dealbridge.png)
+
 ---
 
 ## 🎯 The Problem
